@@ -12,6 +12,26 @@ namespace MPGameCore
 {
     public abstract class TCPConnection
 	{
+		public static Random rnd = new Random();
+		public static char[] chars = {
+			'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+			'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+			'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7',
+			'8', '9', '0'
+		};
+
+		public static string GenRandString(int length_)
+		{
+			string o = "";
+
+			for (int i = 0; i < length_; i++)
+			{				
+				o += chars[rnd.Next(chars.Length)];
+			}
+
+			return o;
+		}
+
 		protected static ManualResetEvent connectionStablished = new ManualResetEvent(false);
 
 		public delegate void tcpCallBack(string data);
@@ -35,7 +55,7 @@ namespace MPGameCore
 			OnConnected?.Invoke(d);
 		}
 
-		// 0 -> OnReceive 1 -> OnConnected
+		// 0 -> OnReceive , 1 -> OnConnected
 		public void BindEventHandler(tcpCallBack cb, int which)
 		{
 			switch (which)

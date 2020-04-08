@@ -19,6 +19,12 @@ namespace MPGameCore.TCP
 		public delegate void StartListeningAsync();
 
 		#region public methods
+		// Constructor
+		public TCPServer()
+		{
+
+		}
+
 		public override void StartIt()
 		{
 			StartListening();
